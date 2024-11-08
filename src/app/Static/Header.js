@@ -1,3 +1,4 @@
+"use client";
 import logo from './logo.png'
 import "./static.css"
 
