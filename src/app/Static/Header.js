@@ -21,7 +21,7 @@ export default function Header() {
                         <ul className="dropdown-menu">
                             <li><span className='dropdown-item'>Name: </span></li>
                             <li><span className='dropdown-item'>Email: </span></li>
-                            <li><button className="dropdown-item fw-bold" onClick={console.log("logout click!")}>Logout</button></li>
+                            <li><button className="dropdown-item fw-bold" onClick={()=>console.log("logout click!")}>Logout</button></li>
                         </ul>
                     </div> :
                     <>
