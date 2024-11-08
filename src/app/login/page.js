@@ -12,7 +12,7 @@ export default function Login() {
   });
 
   const formChangeHandler = (e) => {
-    // console.log(e);
+    console.log(e);
     setSignIn(!signIn);
   };
 
