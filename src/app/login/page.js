@@ -1,8 +1,13 @@
 "use client";
 import { useState } from "react";
 import Header from "../Static/Header";
+import { signInUser, signUpUser, updateName } from "@/Services/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/Services/firebase";
+import { redirect } from "next/navigation";
 
 export default function Login() {
+  const [currentUser, setCurrentUser] = useState();
   const [signIn, setSignIn] = useState(true);
   const [values, setValues] = useState({
     name: "",
@@ -10,6 +15,21 @@ export default function Login() {
     pass: "",
     role: "",
   });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setCurrentUser(user);
+    } else {
+      setCurrentUser(null);
+    }
+  });
+
+  // setTimeout(() => {
+  //   if (currentUser) {
+  //     // console.log(currentUser);
+  //     redirect("/");
+  //   }
+  // }, 3000);
 
   const formChangeHandler = (e) => {
     console.log(e);
@@ -50,6 +70,23 @@ export default function Login() {
 
   const signUpHandler = (e) => {
     e.preventDefault();
+    signUpUser(values.mail, values.pass)
+      .then((userCredentials) => {
+        // save the remaining user info
+        updateNameAndRole(values.name, values.role);
+        console.log(userCredentials);
+      })
+      .catch((err) => err);
+  };
+
+  const signInHandler = (e) => {
+    e.preventDefault();
+    signInUser(values.mail, values.pass)
+      .then((userCredentials) => {
+        // user signed in
+        console.log(userCredentials);
+      })
+      .catch((err) => err);
   };
   return (
     <>
@@ -89,9 +126,11 @@ export default function Login() {
         </div>
 
         {signIn ? (
-          <div className="card w-50 mx-auto py-4">
+          <form className="card w-50 mx-auto py-4" onSubmit={signInHandler}>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
-              <span className="input-group-text">Email : </span>
+              <span className="input-group-text">
+                <i class="bi bi-envelope-at"></i>
+              </span>
               <input
                 type="email"
                 value={values.mail}
@@ -101,7 +140,9 @@ export default function Login() {
               ></input>
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
-              <span className="input-group-text">Password :</span>
+              <span className="input-group-text">
+                <i class="bi bi-key"></i>
+              </span>
               <input
                 type="password"
                 value={values.pass}
@@ -111,45 +152,57 @@ export default function Login() {
               ></input>
             </div>
 
-            <button type="submit" className="btn btn-info col-2 mx-auto my-3">
+            <button
+              type="submit"
+              className="btn btn-info col-2 mx-auto my-3"
+              onClick={signInHandler}
+            >
               SIGNIN
             </button>
-          </div>
+          </form>
         ) : (
-          <div className="card w-50 mx-auto py-4">
+          <form className="card w-50 mx-auto py-4" onSubmit={signUpHandler}>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
-              <span className="input-group-text">Role :</span>
+              <span className="input-group-text">
+                <i class="bi bi-person-workspace"></i>
+              </span>
               <select
                 value={values.role}
                 className="mx-auto form-control text-start border"
                 onChange={roleChangeHandler}
               >
-                <option value="complainer">complainer</option>
-                <option value="maintainer">maintainer</option>
+                <option value="complainer">COMPLAINER</option>
+                <option value="maintainer">MAINTAINER</option>
               </select>
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
-              <span className="input-group-text">Name :</span>
+              <span className="input-group-text">
+                <i class="bi bi-alphabet"></i>
+              </span>
               <input
                 type="name"
                 value={values.name}
-                placeholder="Name"
+                placeholder="Full Name"
                 className="mx-auto form-control text-start border"
                 onChange={nameChangeHandler}
               ></input>
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
-              <span className="input-group-text">Email :</span>
+              <span className="input-group-text">
+                <i class="bi bi-envelope-at"></i>
+              </span>
               <input
                 type="email"
                 value={values.mail}
-                placeholder="Email Id"
+                placeholder="Email Address"
                 className="mx-auto form-control text-start border"
                 onChange={mailChangeHandler}
               ></input>
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
-              <span className="input-group-text">Password :</span>
+              <span className="input-group-text">
+                <i class="bi bi-key"></i>
+              </span>
               <input
                 type="password"
                 value={values.pass}
@@ -159,10 +212,14 @@ export default function Login() {
               ></input>
             </div>
 
-            <button type="submit" className="btn btn-info col-2 mx-auto my-3" onClick={signUpHandler}>
+            <button
+              type="submit"
+              className="btn btn-info col-2 mx-auto my-3"
+              onClick={signUpHandler}
+            >
               SIGNUP
             </button>
-          </div>
+          </form>
         )}
       </div>
     </>

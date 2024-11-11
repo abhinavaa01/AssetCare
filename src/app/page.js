@@ -6,25 +6,25 @@ import { useState } from "react";
 import { redirect } from "next/navigation";
 
 export default function Home() {
-    const [currentUser, setCurrentUser] = useState();
-onAuthStateChanged(auth, (user) => {
+  const [currentUser, setCurrentUser] = useState();
+  onAuthStateChanged(auth, (user) => {
     if (user) {
-        setCurrentUser(user);
+      setCurrentUser(user);
     } else {
-        setCurrentUser(null);
+      setCurrentUser(null);
     }
   });
 
-  if (!currentUser) {
-    redirect("/login");
-  }
+//   setTimeout(() => {
+//     if (!currentUser) {
+//       redirect("/login");
+//     }
+//   }, 3000);
 
   return (
     <>
       <Header />
-      <div className="main-col">
-        
-      </div>
+      <div className="main-col"></div>
     </>
   );
 }

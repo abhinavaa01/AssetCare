@@ -1,4 +1,5 @@
 "use client";
+import { logOut } from '@/Services/auth';
 import logo from './logo.png'
 import "./static.css"
 
@@ -22,7 +23,7 @@ export default function Header() {
                         <ul className="dropdown-menu">
                             <li><span className='dropdown-item'>Name: </span></li>
                             <li><span className='dropdown-item'>Email: </span></li>
-                            <li><button className="dropdown-item fw-bold" onClick={()=>console.log("logout click!")}>Logout</button></li>
+                            <li><button className="dropdown-item fw-bold" onClick={logOut}>Logout</button></li>
                         </ul>
                     </div> :
                     <>
