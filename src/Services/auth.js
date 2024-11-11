@@ -25,6 +25,12 @@ export const signInUser = (email, pass) => {
 
 export const updateName = (name, role) => {
   return updateProfile(auth.currentUser, {
+    displayName: name
+  });
+};
+
+export const updateNameAndRole = (name, role) => {
+  return updateProfile(auth.currentUser, {
     displayName: name,
     photoURL: role
   });
