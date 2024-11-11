@@ -2,9 +2,21 @@
 import { logOut } from '@/Services/auth';
 import logo from './logo.png'
 import "./static.css"
+import { auth } from '@/Services/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useState } from 'react';
 
 export default function Header() {
-    // console.log(logo.src);
+    const [currentUser, setCurrentUser] = useState();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+        console.log(user);
+      } else {
+        setCurrentUser(null);
+      }
+    });
     return (
         <div className='mb-5'>
             <div className="row border mb-2 bg-info fixed-top px-3">
@@ -21,8 +33,9 @@ export default function Header() {
                             <i className="bi bi-person-circle"></i>}
                         </button>
                         <ul className="dropdown-menu">
-                            <li><span className='dropdown-item'>Name: </span></li>
-                            <li><span className='dropdown-item'>Email: </span></li>
+                            <li><span className='dropdown-item'>Name: {currentUser?.displayName}</span></li>
+                            <li><span className='dropdown-item'>Email: {currentUser?.email}</span></li>
+                            <li><span className='dropdown-item'>Role: {currentUser?.photoURL}</span></li>
                             <li><button className="dropdown-item fw-bold" onClick={logOut}>Logout</button></li>
                         </ul>
                     </div> :
