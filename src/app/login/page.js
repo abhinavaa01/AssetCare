@@ -5,6 +5,7 @@ import { signInUser, signUpUser, updateName } from "@/Services/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Services/firebase";
 import { redirect } from "next/navigation";
+import Footer from "../Static/Footer";
 
 export default function Login() {
   const [currentUser, setCurrentUser] = useState();
@@ -24,12 +25,12 @@ export default function Login() {
     }
   });
 
-  // setTimeout(() => {
-  //   if (currentUser) {
-  //     // console.log(currentUser);
-  //     redirect("/");
-  //   }
-  // }, 3000);
+  setTimeout(() => {
+    if (currentUser) {
+      // console.log(currentUser);
+      redirect("/");
+    }
+  }, 3000);
 
   const formChangeHandler = (e) => {
     console.log(e);
@@ -222,6 +223,7 @@ export default function Login() {
           </form>
         )}
       </div>
+      <Footer />
     </>
   );
 }
