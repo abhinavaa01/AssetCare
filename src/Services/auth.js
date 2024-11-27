@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -39,4 +40,8 @@ export const updateNameAndRole = (name, role) => {
 
 export const logOut = () => {
   return signOut(auth);
+};
+
+export const verifyMail = () => {
+  return sendEmailVerification(auth.currentUser);
 };

@@ -1,10 +1,10 @@
 "use client";
-import { logOut, updateNameAndRole } from '@/Services/auth';
+import { logOut, updateNameAndRole, verifyMail } from '@/Services/auth';
 import logo from './logo.png'
 import "./static.css"
 import { auth } from '@/Services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 
 export default function Header() {
@@ -25,7 +25,17 @@ export default function Header() {
         // }).catch((err)=> {
         //     console.log(err);
         // });
-        console.log(currentUser);
+        // console.log(currentUser);
+        alert("Feature coming soon!");
+    }
+
+    const verifyMailHandler = (e) => {
+        e.preventDefault();
+        verifyMail().then((res)=> {
+            alert("Verification mail sent! Check your Inbox");
+        }).catch((err)=> {
+            alert("Something Went Wrong");
+        })
     }
     return (
         <div className='mb-5'>
@@ -44,8 +54,11 @@ export default function Header() {
                         </button>
                         <ul className="dropdown-menu">
                             <li><span className='dropdown-item' onClick={()=>console.log(currentUser)}>Name: {currentUser?.displayName}</span></li>
-                            <li><span className='dropdown-item' onClick={saveProfile}>Email: {currentUser?.email}</span></li>
+                            <li><span className='dropdown-item'>Email: {currentUser?.email}</span></li>
                             <li><span className='dropdown-item'>Role: {currentUser?.photoURL}</span></li>
+                            {currentUser?.emailVerified? 
+                                null:<li><button className="dropdown-item fw-bold" onClick={verifyMailHandler}>Verify Email</button></li>}
+                            <li><button className="dropdown-item fw-bold" onClick={saveProfile}>Update Profile</button></li>
                             <li><button className="dropdown-item fw-bold" onClick={logOut}>Logout</button></li>
                         </ul>
                     </div> :
