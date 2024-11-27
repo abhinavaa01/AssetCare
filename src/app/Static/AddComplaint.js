@@ -8,8 +8,8 @@ export default function AddComplaint() {
   const [values, setValues] = useState({
     // user: currentUser,
     name: currentUser?.displayName,
-    mail: currentUser?.email,
-    mailVerified: currentUser?.emailVerified,
+    email: currentUser?.email,
+    emailVerified: currentUser?.emailVerified,
     phone: "",
     category: "",
     issue: "",
@@ -20,8 +20,8 @@ export default function AddComplaint() {
     setValues({
       ...values,
       name: currentUser?.displayName,
-      mail: currentUser?.email,
-      mailVerified: currentUser?.emailVerified,
+      email: currentUser?.email,
+      emailVerified: currentUser?.emailVerified,
     });
   }, [currentUser]);
 
@@ -35,7 +35,7 @@ export default function AddComplaint() {
   const mailChangeHandler = (e) => {
     setValues({
       ...values,
-      mail: e.target.value,
+      email: e.target.value,
     });
   };
 
@@ -69,9 +69,9 @@ export default function AddComplaint() {
 
   const verifyInputs = () => {
     const inputVerification = new Promise((resolve, reject) => {
-      if (!values.name || !values.mail || !values.phone) {
+      if (!values.name || !values.email || !values.phone) {
         reject("Please fill user details...");
-      } else if (!values.mailVerified) {
+      } else if (!values.emailVerified) {
         reject("Verify your Email ID first before registering a complaint");
       } else if (!values.category) {
         reject("Please choose the category of your complaint");
@@ -124,13 +124,13 @@ export default function AddComplaint() {
             </span>
             <input
               type="email"
-              value={values.mail}
+              value={values.email}
               placeholder="Email Address"
               className="mx-auto form-control text-start border"
               onChange={mailChangeHandler}
               disabled={true}
               title={
-                values.mailVerified
+                values.emailVerified
                   ? "Email Address verified"
                   : "Email Address not verified"
               }
