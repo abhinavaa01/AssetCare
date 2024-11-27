@@ -130,7 +130,7 @@ export default function Login() {
           <form className="card w-50 mx-auto py-4" onSubmit={signInHandler}>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
               <span className="input-group-text">
-                <i class="bi bi-envelope-at"></i>
+                <i className="bi bi-envelope-at"></i>
               </span>
               <input
                 type="email"
@@ -142,7 +142,7 @@ export default function Login() {
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
               <span className="input-group-text">
-                <i class="bi bi-key"></i>
+                <i className="bi bi-key"></i>
               </span>
               <input
                 type="password"
@@ -165,7 +165,7 @@ export default function Login() {
           <form className="card w-50 mx-auto py-4" onSubmit={signUpHandler}>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
               <span className="input-group-text">
-                <i class="bi bi-person-workspace"></i>
+                <i className="bi bi-person-workspace"></i>
               </span>
               <select
                 value={values.role}
@@ -178,7 +178,7 @@ export default function Login() {
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
               <span className="input-group-text">
-                <i class="bi bi-alphabet"></i>
+                <i className="bi bi-alphabet"></i>
               </span>
               <input
                 type="name"
@@ -190,7 +190,7 @@ export default function Login() {
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
               <span className="input-group-text">
-                <i class="bi bi-envelope-at"></i>
+                <i className="bi bi-envelope-at"></i>
               </span>
               <input
                 type="email"
@@ -202,7 +202,7 @@ export default function Login() {
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
               <span className="input-group-text">
-                <i class="bi bi-key"></i>
+                <i className="bi bi-key"></i>
               </span>
               <input
                 type="password"

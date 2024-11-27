@@ -107,7 +107,7 @@ export default function AddComplaint() {
         >
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
             <span className="input-group-text">
-              <i class="bi bi-alphabet"></i>
+              <i className="bi bi-alphabet"></i>
             </span>
             <input
               type="name"
@@ -120,7 +120,7 @@ export default function AddComplaint() {
           </div>
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
             <span className="input-group-text">
-              <i class="bi bi-envelope-at"></i>
+              <i className="bi bi-envelope-at"></i>
             </span>
             <input
               type="email"
@@ -138,7 +138,7 @@ export default function AddComplaint() {
           </div>
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
             <span className="input-group-text">
-              <i class="bi bi-phone"></i>
+              <i className="bi bi-phone"></i>
             </span>
             <input
               type="tel"
@@ -150,14 +150,14 @@ export default function AddComplaint() {
           </div>
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
             <span className="input-group-text">
-              <i class="bi bi-tag"></i>
+              <i className="bi bi-tag"></i>
             </span>
             <select
               value={values.category}
               className="mx-auto form-control text-start border"
               onChange={categoryChangeHandler}
             >
-              <option value="" disabled selected hidden>
+              <option value="" disabled hidden>
                 Select the Category of complaint
               </option>
               <option value="CARPENTER">CARPENTER</option>
@@ -166,7 +166,7 @@ export default function AddComplaint() {
           </div>
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
             <span className="input-group-text">
-              <i class="bi bi-patch-exclamation"></i>
+              <i className="bi bi-patch-exclamation"></i>
             </span>
             <textarea
               type="name"
@@ -178,7 +178,7 @@ export default function AddComplaint() {
           </div>
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
             <span className="input-group-text">
-              <i class="bi bi-geo-alt"></i>
+              <i className="bi bi-geo-alt"></i>
             </span>
             <input
               type="name"
