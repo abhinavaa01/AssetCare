@@ -5,6 +5,8 @@ import { auth } from "@/Services/firebase";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import Footer from "./Static/Footer";
+import MyComplaints from "./Static/MyComplaints";
+import AddComplaint from "./Static/AddComplaint";
 
 export default function Home() {
   const [currentUser, setCurrentUser] = useState();
@@ -25,8 +27,9 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="main-col">
-        <></>
+      <div className="main-col d-flex">
+        <MyComplaints />
+        <AddComplaint />
       </div>
       <Footer />
     </>
