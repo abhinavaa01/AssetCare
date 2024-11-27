@@ -157,7 +157,7 @@ export default function AddComplaint() {
               className="mx-auto form-control text-start border"
               onChange={categoryChangeHandler}
             >
-              <option value="" disabled selected>
+              <option value="" disabled selected hidden>
                 Select the Category of complaint
               </option>
               <option value="CARPENTER">CARPENTER</option>
