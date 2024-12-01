@@ -40,10 +40,10 @@ export default function Header() {
     return (
         <div className='mb-5'>
             <div className="row border mb-2 bg-info fixed-top px-3">
-                <a href="/" className='header-logo my-auto my-1 py-2 d-flex'>
+                <button onClick={()=>redirect("/")} className='header-logo btn my-auto my-1 py-2 d-flex'>
                     <img src={logo.src} className="h-100 w-100 my-auto" alt="Todo"></img>
                     <h2 className='my-auto ms-2 text-dark'>AssetCare</h2>
-                </a>
+                </button>
                 {currentUser ?
                     <div className='dropdown w-auto ms-auto'>
                         {/* <button onClick={logout} className='btn btn-info ms-auto me-3 w-auto h-50 my-auto'>Logout</button> */}

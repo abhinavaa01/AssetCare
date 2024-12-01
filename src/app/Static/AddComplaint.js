@@ -89,6 +89,7 @@ export default function AddComplaint() {
     verifyInputs().then((res)=> {
         registerComplaint(values).then((result)=> {
             console.log(result);
+            alert(`complaint number ${result.id} registered successfully!`);
         }).catch((err)=>console.log(err.message));
     }).catch((error)=> {
         alert(error);

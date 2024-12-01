@@ -1,3 +1,6 @@
+import Footer from "./Static/Footer";
+import Header from "./Static/Header";
+
 export const metadata = {
   title: "AssetCare",
   description: "Created by Abhinav",
@@ -19,7 +22,11 @@ export default function RootLayout({ children }) {
         ></link>
       </head>
       <body>
-        <>{children}</>
+        <>
+          <Header />
+          {children}
+          <Footer />
+        </>
 
         <script
           src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

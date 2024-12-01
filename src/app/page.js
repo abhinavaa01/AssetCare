@@ -5,7 +5,7 @@ import { auth } from "@/Services/firebase";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import Footer from "./Static/Footer";
-import MyComplaints from "./Static/MyComplaints";
+import MyComplaints from "./complaints/page";
 import AddComplaint from "./Static/AddComplaint";
 
 export default function Home() {
