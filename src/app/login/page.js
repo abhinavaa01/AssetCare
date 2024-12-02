@@ -91,9 +91,8 @@ export default function Login() {
   };
   return (
     <>
-      <Header />
-      <div className="main-col d-flex card my-4 py-3">
-        <h2 className="mx-auto my-auto">
+      <div className=" d-flex card my-4 py-3">
+        <h2 className="mx-auto my-auto text-center">
           Signin with your AssetCare account or create One!
         </h2>
 
@@ -127,7 +126,7 @@ export default function Login() {
         </div>
 
         {signIn ? (
-          <form className="card w-50 mx-auto py-4" onSubmit={signInHandler}>
+          <form className="card col-10 col-md-8 col-lg-6 mx-auto py-4" onSubmit={signInHandler}>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
               <span className="input-group-text">
                 <i className="bi bi-envelope-at"></i>
@@ -155,14 +154,14 @@ export default function Login() {
 
             <button
               type="submit"
-              className="btn btn-info col-2 mx-auto my-3"
+              className="btn btn-info w-auto mx-auto my-3"
               onClick={signInHandler}
             >
               SIGNIN
             </button>
           </form>
         ) : (
-          <form className="card w-50 mx-auto py-4" onSubmit={signUpHandler}>
+          <form className="card col-10 col-md-8 col-lg-6 mx-auto py-4" onSubmit={signUpHandler}>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
               <span className="input-group-text">
                 <i className="bi bi-person-workspace"></i>
@@ -215,7 +214,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className="btn btn-info col-2 mx-auto my-3"
+              className="btn btn-info w-auto mx-auto my-3"
               onClick={signUpHandler}
             >
               SIGNUP
@@ -223,7 +222,6 @@ export default function Login() {
           </form>
         )}
       </div>
-      <Footer />
     </>
   );
 }
