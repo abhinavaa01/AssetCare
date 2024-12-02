@@ -1,4 +1,4 @@
-import AddComplaint from "./Static/AddComplaint";
+import AddComplaint from "./AddComplaint";
 
 export default function Modal() {
   return (

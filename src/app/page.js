@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import Footer from "./Static/Footer";
 import MyComplaints from "./complaints/page";
 import AddComplaint from "./Static/AddComplaint";
-import Modal from "./Modal";
+import Modal from "./Static/Modal";
 
 export default function Home() {
   const [currentUser, setCurrentUser] = useState();
