@@ -49,13 +49,13 @@ export default function MyComplaints() {
       {loading && !complaints.length ? <Loader /> : null}
       <div className="w-100 d-flex justify-content-center">
         <button className="btn btn-info m-3" onClick={getComplaints}>
-        <i class="bi bi-cloud-download-fill"></i> Get complaints
+        <i className="bi bi-cloud-download-fill"></i> Fetch Complaints
         </button>
         <button
           className="btn btn-info m-3"
           onClick={() => redirect("/complaints")}
         >
-          <i class="bi bi-list-ul"></i> All complaints
+          <i className="bi bi-list-ul"></i> All Complaints Page
         </button>
       </div>
     </div>

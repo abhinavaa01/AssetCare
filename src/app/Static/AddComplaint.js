@@ -86,21 +86,25 @@ export default function AddComplaint() {
 
   const newComplaint = (e) => {
     e.preventDefault();
-    verifyInputs().then((res)=> {
-        registerComplaint(values).then((result)=> {
+    verifyInputs()
+      .then((res) => {
+        registerComplaint(values)
+          .then((result) => {
             console.log(result);
             alert(`complaint number ${result.id} registered successfully!`);
-        }).catch((err)=>console.log(err.message));
-    }).catch((error)=> {
+          })
+          .catch((err) => console.log(err.message));
+      })
+      .catch((error) => {
         alert(error);
-    })
+      });
   };
   return (
     <>
-      <div className="col-md-6 col-12 vh-100 pt-3">
-        <div className="h4 text-center my-2">
+      <div className="modal-body pt-3">
+        {/* <div className="h4 text-center my-2">
           Facing an issue? Register a new Complaint...
-        </div>
+        </div> */}
         <form
           id="NewComplaint"
           onSubmit={newComplaint}
@@ -189,15 +193,19 @@ export default function AddComplaint() {
               onChange={addressChangeHandler}
             ></input>
           </div>
-
-          <button
-            type="submit"
-            onClick={newComplaint}
-            className="mx-auto mt-3 btn btn-info"
-          >
-            Submit Complaint
-          </button>
         </form>
+      </div>
+      <div className="modal-footer">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button type="submit" onClick={newComplaint} className="btn btn-success">
+          Save changes
+        </button>
       </div>
     </>
   );
