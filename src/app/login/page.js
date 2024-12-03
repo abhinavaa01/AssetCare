@@ -1,20 +1,21 @@
 "use client";
 import { useState } from "react";
-import Header from "../Static/Header";
 import { signInUser, signUpUser, updateName } from "@/Services/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Services/firebase";
 import { redirect } from "next/navigation";
-import Footer from "../Static/Footer";
 
 export default function Login() {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(auth.currentUser);
   const [signIn, setSignIn] = useState(true);
   const [values, setValues] = useState({
     name: "",
     mail: "",
     pass: "",
     role: "",
+    loading: false,
+    successmsg: "",
+    errormsg: ""
   });
 
   onAuthStateChanged(auth, (user) => {
@@ -69,34 +70,80 @@ export default function Login() {
     });
   };
 
+  const handleLoading = (state) => {
+    setValues({
+      errormsg: "",
+      successmsg: "",
+      loading: state,
+    });
+  };
+
+  const failure = (msg) => {
+    setValues({
+      errormsg: msg,
+      successmsg: "",
+      loading: "",
+    });
+    setTimeout(() => {
+      setValues({
+        errormsg: "",
+        successmsg: "",
+        loading: false,
+      });
+    }, 2500);
+  };
+
+  const success = (msg) => {
+    setValues({
+      errormsg: "",
+      successmsg: msg,
+      loading: "",
+    });
+    setTimeout(() => {
+      setValues({
+        errormsg: "",
+        successmsg: "",
+        loading: false,
+      });
+    }, 2500);
+  };
+
   const signUpHandler = (e) => {
     e.preventDefault();
+    handleLoading(true);
     signUpUser(values.mail, values.pass)
       .then((userCredentials) => {
+        success("User Signed Up successFully! Redirecting to home page...")
         // save the remaining user info
         updateNameAndRole(values.name, values.role);
         console.log(userCredentials);
       })
-      .catch((err) => err);
+      .catch((err) => {
+        failure(err);
+      });
   };
 
   const signInHandler = (e) => {
     e.preventDefault();
+    handleLoading(true);
     signInUser(values.mail, values.pass)
       .then((userCredentials) => {
+        success("Signed in successfully! Please wait till you are redirected to the home page...");
         // user signed in
         console.log(userCredentials);
       })
-      .catch((err) => err);
+      .catch((err) => {
+        failure(err);
+      });
   };
   return (
     <>
-      <div className=" d-flex card my-4 py-3">
-        <h2 className="mx-auto my-auto text-center">
+      <div className="d-flex card my-4 py-3">
+        <h2 className="mx-auto my-auto text-center mb-4">
           Signin with your AssetCare account or create One!
         </h2>
 
-        <div className="d-flex mx-auto my-auto">
+        <div className="d-flex mx-auto my-auto mb-4">
           <div className="d-flex border p-3 rounded">
             <input
               type="radio"
@@ -221,6 +268,44 @@ export default function Login() {
             </button>
           </form>
         )}
+        {values.errormsg ? (
+            <div className="form-group text-start animate__animated animate__pulse">
+              <div
+                className="form-check-label alert alert-danger text-capitalized"
+                id="loginerror"
+              >
+                <i className="bi bi-exclamation-circle-fill"></i>{" "}
+                {values.errormsg}
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+          {values.successmsg ? (
+            <div className="form-group text-start">
+              <div
+                className="form-check-label alert alert-success text-capitalized"
+                role="alert"
+              >
+                <i className="bi bi-check-circle-fill"></i> {values.successmsg}
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+          {values.loading ? (
+            <div className="form-group text-start">
+              <div
+                className="form-check-label alert alert-warning text-capitalized "
+                role="alert"
+              >
+                <span className="spinner-border spinner-border-sm"></span>{" "}
+                Loading...
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
       </div>
     </>
   );
