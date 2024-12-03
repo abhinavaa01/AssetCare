@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Loader } from "../Static/Loader";
 import Complaint from "./Complaint";
 import { redirect } from "next/navigation";
+import Modal from "../Static/Modal";
 
 export default function MyComplaints() {
   const currentUser = auth.currentUser;
@@ -49,14 +50,19 @@ export default function MyComplaints() {
       {loading && !complaints.length ? <Loader /> : null}
       <div className="w-100 d-flex justify-content-center">
         <button className="btn btn-info m-3" onClick={getComplaints}>
-        <i className="bi bi-cloud-download-fill"></i> Fetch Complaints
+          <i className="bi bi-cloud-download"></i> Fetch Complaints
         </button>
         <button
           className="btn btn-info m-3"
-          onClick={() => redirect("/complaints")}
+          data-bs-toggle="modal"
+          data-bs-target="#AddcomplaintModal"
         >
-          <i className="bi bi-list-ul"></i> All Complaints Page
+          <i className="bi bi-file-earmark"></i> New Complaint
         </button>
+        <button className="btn btn-info m-3" onClick={() => redirect("/")}>
+          <i className="bi bi-house"></i> Home Page
+        </button>
+        <Modal />
       </div>
     </div>
   );

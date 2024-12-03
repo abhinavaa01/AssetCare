@@ -204,7 +204,7 @@ export default function AddComplaint() {
           Close
         </button>
         <button type="submit" onClick={newComplaint} className="btn btn-success">
-          Save changes
+          Register
         </button>
       </div>
     </>
