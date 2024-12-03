@@ -91,7 +91,7 @@ export default function AddComplaint() {
         registerComplaint(values)
           .then((result) => {
             console.log(result);
-            alert(`complaint number ${result.id} registered successfully!`);
+            alert(`complaint Id ${result.id} registered successfully!`);
           })
           .catch((err) => console.log(err.message));
       })

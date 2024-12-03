@@ -50,7 +50,7 @@ export default function MyComplaints() {
       {loading && !complaints.length ? <Loader /> : null}
       <div className="w-100 d-flex justify-content-center">
         <button className="btn btn-info m-3" onClick={getComplaints}>
-          <i className="bi bi-cloud-download"></i> Fetch Complaints
+        <i class="bi bi-arrow-repeat"></i> Refresh
         </button>
         <button
           className="btn btn-info m-3"
