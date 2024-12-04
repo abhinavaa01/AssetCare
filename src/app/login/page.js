@@ -28,8 +28,12 @@ export default function Login() {
 
   setTimeout(() => {
     if (currentUser) {
+      if (currentUser.photoURL === "complainer") {
       // console.log(currentUser);
       redirect("/");
+      } else {
+        redirect("/maintainer");
+      }
     }
   }, 3000);
 
@@ -269,7 +273,7 @@ export default function Login() {
           </form>
         )}
         {values.errormsg ? (
-            <div className="form-group text-start animate__animated animate__pulse">
+            <div className="form-group text-start col-10 col-md-6 mx-auto mt-3 animate__animated animate__pulse">
               <div
                 className="form-check-label alert alert-danger text-capitalized"
                 id="loginerror"
@@ -282,7 +286,7 @@ export default function Login() {
             <></>
           )}
           {values.successmsg ? (
-            <div className="form-group text-start">
+            <div className="form-group text-start col-10 col-md-6 mx-auto mt-3">
               <div
                 className="form-check-label alert alert-success text-capitalized"
                 role="alert"
@@ -294,9 +298,9 @@ export default function Login() {
             <></>
           )}
           {values.loading ? (
-            <div className="form-group text-start">
+            <div className="form-group text-start col-10 col-md-6 mx-auto mt-3">
               <div
-                className="form-check-label alert alert-warning text-capitalized "
+                className="form-check-label alert alert-warning text-capitalized"
                 role="alert"
               >
                 <span className="spinner-border spinner-border-sm"></span>{" "}

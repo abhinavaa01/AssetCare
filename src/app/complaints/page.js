@@ -62,6 +62,9 @@ export default function MyComplaints() {
         <button className="btn btn-info m-3" onClick={() => redirect("/")}>
           <i className="bi bi-house"></i> Home Page
         </button>
+        {/* <button className="btn btn-info m-3" onClick={() => console.log(currentUser.photoURL)}>
+          <i className="bi bi-house"></i> Testing 123
+        </button> */}
         <Modal />
       </div>
     </div>
