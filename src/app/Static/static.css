@@ -71,3 +71,14 @@
 .text-decoration-none {
   text-decoration: none !important;
 }
+.dcrust-background {
+  background-image: url(./background.jpg) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.full-height {
+  height: 98vh !important;
+}
+.blur-background {
+  backdrop-filter: inherit;
+}

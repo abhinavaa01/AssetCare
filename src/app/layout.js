@@ -1,5 +1,6 @@
 import Footer from "./Static/Footer";
 import Header from "./Static/Header";
+import "../app/Static/static.css"
 
 export const metadata = {
   title: "AssetCare",

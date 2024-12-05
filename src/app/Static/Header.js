@@ -1,7 +1,6 @@
 "use client";
 import { logOut, updateNameAndRole, verifyMail } from '@/Services/auth';
 import logo from './logo.png'
-import "./static.css"
 import { auth } from '@/Services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
@@ -20,6 +19,7 @@ export default function Header() {
     });
 
     const saveProfile = (e) => {
+        redirect("/profile");
         // updateNameAndRole("Abhinav", "Complainer").then((res)=> {
         //     console.log(res);
         // }).catch((err)=> {

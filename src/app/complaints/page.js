@@ -38,7 +38,7 @@ export default function MyComplaints() {
       });
   };
   return (
-    <div className="vh-100 pt-3">
+    <div className="vh-100 pt-3 dcust-background">
       {complaints.length ? null : (
         <div className="mt-5 text-center">No complaints...</div>
       )}
