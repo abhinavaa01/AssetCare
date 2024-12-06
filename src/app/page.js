@@ -1,12 +1,8 @@
 "use client";
 import { onAuthStateChanged } from "firebase/auth";
-import Header from "./Static/Header";
 import { auth } from "@/Services/firebase";
 import { useState } from "react";
 import { redirect } from "next/navigation";
-import Footer from "./Static/Footer";
-import MyComplaints from "./complaints/page";
-import AddComplaint from "./Static/AddComplaint";
 import Modal from "./Static/Modal";
 
 export default function Home() {
@@ -27,16 +23,27 @@ export default function Home() {
 
   return (
     <>
-      <Header />
-      <div className="main-col d-flex flex-column">
+      <div className="main-col d-flex flex-column dcrust-background full-height">
         <div className="m-auto h1">Home page</div>
         <div className="m-auto">
-          <button className="btn btn-info" onClick={()=>redirect("/complaints")}>Go to ALL Complaints Page</button>
-        <button className="btn btn-info ms-3" data-bs-toggle="modal" data-bs-target="#AddcomplaintModal">New Complaint</button>
-        <Modal />
+          <button
+            className="btn btn-info p-5"
+            onClick={() => redirect("/complaints")}
+          >
+            <i className="bi bi-list h2"></i>
+            <span className="h1"> ALL Complaints</span>
+          </button>
+          <button
+            className="btn btn-info ms-3 p-5"
+            data-bs-toggle="modal"
+            data-bs-target="#AddcomplaintModal"
+          >
+            <i className="bi bi-folder-plus h2"></i>
+            <span className="h1"> New Complaint</span>
+          </button>
+          <Modal />
         </div>
       </div>
-      <Footer />
     </>
   );
 }

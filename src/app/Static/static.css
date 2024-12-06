@@ -1,6 +1,6 @@
 .main-col {
   margin-top: 15px;
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
   min-height: 75vh;
 }
 .header-logo {
@@ -77,7 +77,7 @@
   background-size: cover;
 }
 .full-height {
-  height: 98vh !important;
+  height: 92vh !important;
 }
 .blur-background {
   backdrop-filter: inherit;

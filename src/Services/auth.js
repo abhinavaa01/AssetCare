@@ -38,6 +38,15 @@ export const updateNameAndRole = (name, role) => {
   });
 };
 
+export const updateProfileData = (name, phone, role, category) => {
+  console.log(name, phone, role, category);
+  return updateProfile(auth.currentUser, {
+    displayName: name,
+    phoneNumber: phone,
+    photoURL: role + "." + category
+  });
+};
+
 export const logOut = () => {
   return signOut(auth);
 };
