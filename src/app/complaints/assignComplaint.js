@@ -1,7 +1,7 @@
 import { assignComplaintTo } from "@/Services/api";
 
 export default function AssignComplaint(props) {
-  const { data, key, index, maintainer } = props;
+  const { data, index, maintainer } = props;
   const complaintDate = new Date(data.createDate.toMillis());
   // console.log( data );
 

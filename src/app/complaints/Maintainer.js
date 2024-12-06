@@ -17,7 +17,7 @@ export default function Maintainer() {
     
     const getComplaints = () => {
         setLoading(true);
-        getComplaintsByCategory(currentUser.photoURL.split(".")[1].toUpperCase())
+        getComplaintsByCategory(currentUser?.photoURL?.split(".")[1].toUpperCase())
           .then((res) => {
             console.log(res);
             populateData(res);
