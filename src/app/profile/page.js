@@ -1,8 +1,8 @@
 "use client";
-import { updateNameAndRole, updateProfileData, verifyMail } from "@/Services/auth";
+import { updateNameAndRole, updatePhoneFunc, updateProfileData, verifyMail } from "@/Services/auth";
 import { auth } from "@/Services/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
   const [user, setUser] = useState(auth.currentUser);
@@ -17,6 +17,18 @@ export default function Profile() {
     errormsg: "",
     successmsg: "",
   });
+
+  useEffect(()=> {
+    if (user?.displayName)
+    setValues({
+      ...values,
+      phone: user.phoneNumber,
+      name: user.displayName,
+      role: user.photoURL.split(".")[0],
+      category: user.photoURL.split(".")[1],
+      email: user.email,
+    });
+  }, [user])
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -73,12 +85,27 @@ export default function Profile() {
   const saveProfile = (e) => {
     e.preventDefault();
     updateField("loading", true);
-    updateProfileData(values.name, values.phone, values.role, values.category).then((res)=> {
+    updateProfileData(values.name, values.role, values.category).then((res)=> {
       success("Profile updated successfully!");
       setEditing(false);
     }).catch((err)=> {
       failure(err.message? err.message : err);
     })
+  };
+
+  const savePhone = (e) => {
+    e.preventDefault();
+    updateField("loading", true);
+    if (values.phone !== user.phoneNumber)
+    updatePhoneFunc(values.phone).then((res)=> {
+      success("Phone Number updated successfully!");
+      setEditing(false);
+    }).catch((err)=> {
+      failure(err.message? err.message : err);
+    });
+    else {
+      failure("Nothing changed to update");
+    }
   };
 
   const editProfile = (e) => {
@@ -122,6 +149,7 @@ export default function Profile() {
                     disabled={!editing}
                     onChange={(e)=> updateField("phone", e.target.value)}
                   />
+                  <button className="btn btn-sm btn-info mt-1" disabled={!editing} onClick={savePhone}>Update Phone Number</button>
                 </td>
               </tr>
               <tr>
@@ -140,7 +168,7 @@ export default function Profile() {
                   </select>
                 </td>
               </tr>
-              {values.role === "maintainer" ? (
+              {values.role.toLowerCase() === "maintainer" ? (
                 <tr>
                   <th scope="row" className="fw-bold fs-5 py-3">
                     Category :

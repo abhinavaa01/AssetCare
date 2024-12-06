@@ -3,6 +3,7 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
   signOut,
+  updatePhoneNumber,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./firebase";
@@ -38,11 +39,15 @@ export const updateNameAndRole = (name, role) => {
   });
 };
 
-export const updateProfileData = (name, phone, role, category) => {
+export const updatePhoneFunc = (phone) => {
+  // console.log("name: " +name, "phone: " +phone,"role: " + role,"category: " + category);
+  return updatePhoneNumber(auth.currentUser, phone);
+};
+
+export const updateProfileData = (name, role, category) => {
   // console.log("name: " +name, "phone: " +phone,"role: " + role,"category: " + category);
   return updateProfile(auth.currentUser, {
     displayName: name,
-    phoneNumber: phone,
     photoURL: role + "." + category
   });
 };
