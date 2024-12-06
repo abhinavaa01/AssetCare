@@ -1,4 +1,4 @@
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const registerComplaint = async (values) => {
@@ -16,4 +16,18 @@ export const getComplaintsByEmailId = async (emailId) => {
   const docRef = collection(db, "complaints");
   const q = query(docRef, where("userEmail", "==", emailId));
   return await getDocs(q);
+};
+
+export const getComplaintsByCategory = async (category) => {
+  const docRef = collection(db, "complaints");
+  const q = query(docRef, where("category", "==", category));
+  return await getDocs(q);
+};
+
+export const assignComplaintTo = async (docId, maintainer) => {
+  const docRef = collection(db, docId);
+  return updateDoc(docRef, {
+    assignedTo: maintainer.name,
+    assignedToNumber: maintainer.phone
+  })
 };
