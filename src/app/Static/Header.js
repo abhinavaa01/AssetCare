@@ -55,7 +55,7 @@ export default function Header() {
                         <ul className="dropdown-menu">
                             <li><span className='dropdown-item' onClick={()=>console.log(currentUser)}>Name: {currentUser?.displayName}</span></li>
                             <li><span className='dropdown-item'>Email: {currentUser?.email}</span></li>
-                            <li><span className='dropdown-item'>Role: {currentUser?.photoURL}</span></li>
+                            <li><span className='dropdown-item'>Role: {currentUser?.photoURL?.split(".")[0]}</span></li>
                             {currentUser?.emailVerified? 
                                 null:<li><button className="dropdown-item fw-bold" onClick={verifyMailHandler}>Verify Email</button></li>}
                             <li><button className="dropdown-item fw-bold" onClick={saveProfile}>Update Profile</button></li>

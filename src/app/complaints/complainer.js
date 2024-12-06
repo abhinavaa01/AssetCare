@@ -1,0 +1,66 @@
+import { getComplaintsByEmailId } from "@/Services/api";
+import { auth } from "@/Services/firebase";
+import Complaint from "./Complaint";
+
+export default function Complainer() {
+    const currentUser = auth.currentUser;
+    const [complaints, setComplaints] = useState([]);
+    const [loading, setLoading] = useState(false);
+  
+    useEffect(() => {
+      // fetch complaints on user change
+      if (currentUser?.email) getComplaints();
+    }, [currentUser]);
+  
+    const populateData = (dataArray) => {
+      const newArray = [];
+      dataArray.forEach((doc) => {
+        newArray.push({ ...doc.data(), id: doc.id });
+      });
+      setComplaints(newArray);
+    };
+    const getComplaints = () => {
+      setLoading(true);
+      getComplaintsByEmailId(currentUser.email)
+        .then((res) => {
+          console.log(res);
+          populateData(res);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    };
+
+    return (<div className="vh-100 pt-3 dcrust-background">
+        {complaints.length ? null : (
+          <div className="mt-5 text-center">No complaints...</div>
+        )}
+        <div className="row g-md-2 g-3 justify-content-center">
+          {complaints.map((value, index) => {
+            return <Complaint data={value} key={index} index={index} />;
+          })}
+        </div>
+        {loading && !complaints.length ? <Loader /> : null}
+        <div className="w-100 d-flex justify-content-center">
+          <button className="btn btn-info m-3" onClick={getComplaints}>
+          <i class="bi bi-arrow-repeat"></i> Refresh
+          </button>
+          <button
+            className="btn btn-info m-3"
+            data-bs-toggle="modal"
+            data-bs-target="#AddcomplaintModal"
+          >
+            <i className="bi bi-folder-plus"></i> New Complaint
+          </button>
+          <button className="btn btn-info m-3" onClick={() => redirect("/")}>
+            <i className="bi bi-house"></i> Home Page
+          </button>
+          {/* <button className="btn btn-info m-3" onClick={() => console.log(currentUser.photoURL)}>
+            <i className="bi bi-house"></i> Testing 123
+          </button> */}
+          <Modal />
+        </div>
+      </div>)
+}

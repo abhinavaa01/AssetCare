@@ -39,7 +39,7 @@ export const updateNameAndRole = (name, role) => {
 };
 
 export const updateProfileData = (name, phone, role, category) => {
-  console.log(name, phone, role, category);
+  // console.log("name: " +name, "phone: " +phone,"role: " + role,"category: " + category);
   return updateProfile(auth.currentUser, {
     displayName: name,
     phoneNumber: phone,
