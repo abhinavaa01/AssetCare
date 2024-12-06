@@ -33,6 +33,7 @@ export default function Home() {
             <i className="bi bi-list h2"></i>
             <span className="h1"> ALL Complaints</span>
           </button>
+          {currentUser?.photoURL?.split(".")[0]==="complainer"?
           <button
             className="btn btn-info ms-3 p-5"
             data-bs-toggle="modal"
@@ -40,7 +41,7 @@ export default function Home() {
           >
             <i className="bi bi-folder-plus h2"></i>
             <span className="h1"> New Complaint</span>
-          </button>
+          </button>: null}
           <Modal />
         </div>
       </div>

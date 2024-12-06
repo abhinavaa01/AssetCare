@@ -17,7 +17,7 @@ export default function Maintainer() {
     
     const getComplaints = () => {
         setLoading(true);
-        getComplaintsByCategory(currentUser.photoURL.split(".")[1])
+        getComplaintsByCategory(currentUser.photoURL.split(".")[1].toUpperCase())
           .then((res) => {
             console.log(res);
             populateData(res);
@@ -63,7 +63,6 @@ export default function Maintainer() {
           {/* <button className="btn btn-info m-3" onClick={() => console.log(currentUser.photoURL)}>
             <i className="bi bi-house"></i> Testing 123
           </button> */}
-          <Modal />
         </div>
       </div>)
 }

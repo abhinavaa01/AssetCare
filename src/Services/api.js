@@ -1,4 +1,4 @@
-import { collection, addDoc, query, where, getDocs, updateDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const registerComplaint = async (values) => {
@@ -25,7 +25,7 @@ export const getComplaintsByCategory = async (category) => {
 };
 
 export const assignComplaintTo = async (docId, maintainer) => {
-  const docRef = collection(db, docId);
+  const docRef = doc(db, "complaints", docId);
   return updateDoc(docRef, {
     assignedTo: maintainer.name,
     assignedToNumber: maintainer.phone
