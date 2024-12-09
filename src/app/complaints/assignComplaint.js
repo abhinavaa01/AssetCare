@@ -40,7 +40,7 @@ export default function AssignComplaint(props) {
     // console.log(data);
   };
   return (
-    <div className="col-4 col-md-3 shadow-sm card p-3 mx-2">
+    <div className="col-10 col-md-3 shadow-sm card p-3 mx-2">
       <div className="fw-bold">Complaint Number: {index + 1}</div>
       <div className="">Complaint Id: {data.id}</div>
       <div className="">Name: {data.userName}</div>
