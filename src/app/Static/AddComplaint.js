@@ -25,46 +25,8 @@ export default function AddComplaint() {
     });
   }, [currentUser]);
 
-  const nameChangeHandler = (e) => {
-    setValues({
-      ...values,
-      name: e.target.value,
-    });
-  };
-
-  const mailChangeHandler = (e) => {
-    setValues({
-      ...values,
-      email: e.target.value,
-    });
-  };
-
-  const phoneChangeHandler = (e) => {
-    setValues({
-      ...values,
-      phone: e.target.value,
-    });
-  };
-
-  const categoryChangeHandler = (e) => {
-    setValues({
-      ...values,
-      category: e.target.value,
-    });
-  };
-
-  const issueChangeHandler = (e) => {
-    setValues({
-      ...values,
-      issue: e.target.value,
-    });
-  };
-
-  const addressChangeHandler = (e) => {
-    setValues({
-      ...values,
-      address: e.target.value,
-    });
+  const updateField = (field, value) => {
+    setValues({ ...values, [field]: value });
   };
 
   const verifyInputs = () => {
@@ -119,7 +81,7 @@ export default function AddComplaint() {
               value={values.name}
               placeholder="Full Name"
               className="mx-auto form-control text-start border"
-              onChange={nameChangeHandler}
+              onChange={(e) => updateField("name", e.target.value)}
               disabled={true}
             ></input>
           </div>
@@ -132,7 +94,7 @@ export default function AddComplaint() {
               value={values.email}
               placeholder="Email Address"
               className="mx-auto form-control text-start border"
-              onChange={mailChangeHandler}
+              onChange={(e) => updateField("email", e.target.value)}
               disabled={true}
               title={
                 values.emailVerified
@@ -150,7 +112,7 @@ export default function AddComplaint() {
               value={values.phone}
               placeholder="Contact Number"
               className="mx-auto form-control text-start border"
-              onChange={phoneChangeHandler}
+              onChange={(e) => updateField("phone", e.target.value)}
             ></input>
           </div>
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
@@ -160,13 +122,14 @@ export default function AddComplaint() {
             <select
               value={values.category}
               className="mx-auto form-control text-start border"
-              onChange={categoryChangeHandler}
+              onChange={(e) => updateField("category", e.target.value)}
             >
               <option value="" disabled hidden>
                 Select the Category of complaint
               </option>
               <option value="CARPENTER">CARPENTER</option>
               <option value="PLUMBER">PLUMBER</option>
+              <option value="ELECTRICIAN">ELECTRICIAN</option>
             </select>
           </div>
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
@@ -178,7 +141,7 @@ export default function AddComplaint() {
               value={values.issue}
               placeholder="Explain your issue in brief here"
               className="m-auto form-control text-start border"
-              onChange={issueChangeHandler}
+              onChange={(e) => updateField("issue", e.target.value)}
             ></textarea>
           </div>
           <div className="input-group flex-nowrap w-75 mx-auto my-1">
@@ -190,7 +153,7 @@ export default function AddComplaint() {
               value={values.address}
               placeholder="Where should be the issue addressed at?"
               className="m-auto form-control text-start border"
-              onChange={addressChangeHandler}
+              onChange={(e) => updateField("address", e.target.value)}
             ></input>
           </div>
         </form>
@@ -203,7 +166,7 @@ export default function AddComplaint() {
         >
           Close
         </button>
-        <button type="submit" onClick={newComplaint} className="btn btn-success">
+        <button type="submit" onClick={newComplaint} data-bs-dismiss="modal" className="btn btn-success">
           Register
         </button>
       </div>
