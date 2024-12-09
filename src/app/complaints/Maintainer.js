@@ -12,7 +12,7 @@ export default function Maintainer() {
     const [loading, setLoading] = useState(false);
     const adminData = {
         name: currentUser?.displayName,
-        phone: currentUser?.phoneNumber
+        phone: currentUser?.photoURL?.split(".")[2]
     }
     
     const getComplaints = () => {

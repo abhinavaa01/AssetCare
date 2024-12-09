@@ -8,7 +8,7 @@ export default function Profile() {
   const [user, setUser] = useState(auth.currentUser);
   const [editing, setEditing] = useState(false);
   const [values, setValues] = useState({
-    phone: user?.phoneNumber || "",
+    phone: user?.photoURL.split(".")[2] || "",
     name: user?.displayName || "",
     role: user?.photoURL?.split(".")[0] || "",
     category: user?.photoURL?.split(".")[1] || "",
@@ -22,7 +22,7 @@ export default function Profile() {
     if (user?.displayName)
     setValues({
       ...values,
-      phone: user.phoneNumber,
+      phone: user.photoURL.split(".")[2],
       name: user.displayName,
       role: user.photoURL.split(".")[0],
       category: user.photoURL.split(".")[1],
@@ -85,7 +85,7 @@ export default function Profile() {
   const saveProfile = (e) => {
     e.preventDefault();
     updateField("loading", true);
-    updateProfileData(values.name, values.role, values.category).then((res)=> {
+    updateProfileData(values.name, values.role, values.category, values.phone).then((res)=> {
       success("Profile updated successfully!");
       setEditing(false);
     }).catch((err)=> {
@@ -93,20 +93,21 @@ export default function Profile() {
     })
   };
 
-  const savePhone = (e) => {
-    e.preventDefault();
-    updateField("loading", true);
-    if (values.phone !== user.phoneNumber)
-    updatePhoneFunc(values.phone).then((res)=> {
-      success("Phone Number updated successfully!");
-      setEditing(false);
-    }).catch((err)=> {
-      failure(err.message? err.message : err);
-    });
-    else {
-      failure("Nothing changed to update");
-    }
-  };
+  // const savePhone = (e) => {
+  //   e.preventDefault();
+  //   updateField("loading", true);
+  //   if (values.phone !== user.photoURL.split(".")[2])
+  //   updatePhoneFunc(values.phone).then((res)=> {
+  //     success("Phone Number updated successfully!");
+  //     setEditing(false);
+  //   }).catch((err)=> {
+  //     console.log(err);
+  //     failure(err.message? err.message : err);
+  //   });
+  //   else {
+  //     failure("Nothing changed to update");
+  //   }
+  // };
 
   const editProfile = (e) => {
     console.log("sdfg");
@@ -149,7 +150,7 @@ export default function Profile() {
                     disabled={!editing}
                     onChange={(e)=> updateField("phone", e.target.value)}
                   />
-                  <button className="btn btn-sm btn-info mt-1" disabled={!editing} onClick={savePhone}>Update Phone Number</button>
+                  {/* <button className="btn btn-sm btn-info mt-1" disabled={!editing} onClick={savePhone}>Update Phone Number</button> */}
                 </td>
               </tr>
               <tr>
@@ -163,12 +164,12 @@ export default function Profile() {
                     disabled={!editing}
                     onChange={(e) => updateField("role", e.target.value)}
                   >
-                    <option value="complainer">Complainer</option>
-                    <option value="maintainer">Maintainer</option>
+                    <option value="complainer" selected={user?.photoURL?.split(".")[0]==="complainer"}>Complainer</option>
+                    <option value="maintainer" selected={user?.photoURL?.split(".")[0]==="maintainer"}>Maintainer</option>
                   </select>
                 </td>
               </tr>
-              {values.role.toLowerCase() === "maintainer" ? (
+              {values.role?.toLowerCase() === "maintainer" ? (
                 <tr>
                   <th scope="row" className="fw-bold fs-5 py-3">
                     Category :
@@ -180,9 +181,9 @@ export default function Profile() {
                       disabled={!editing}
                       onChange={(e) => updateField("category", e.target.value)}
                     >
-                      <option value="carpenter">Carpenter</option>
-                      <option value="plumber">Plumber</option>
-                      <option value="electrician">Electrician</option>
+                      <option value="carpenter" selected={user?.photoURL?.split(".")[1]==="carpenter"}>Carpenter</option>
+                      <option value="plumber" selected={user?.photoURL?.split(".")[1]==="plumber"}>Plumber</option>
+                      <option value="electrician" selected={user?.photoURL?.split(".")[1]==="electrician"}>Electrician</option>
                     </select>
                   </td>
                 </tr>

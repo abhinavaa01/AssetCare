@@ -1,7 +1,9 @@
 import {
   createUserWithEmailAndPassword,
+  RecaptchaVerifier,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  signInWithPhoneNumber,
   signOut,
   updatePhoneNumber,
   updateProfile,
@@ -28,27 +30,26 @@ export const signInUser = (email, pass) => {
 
 export const updateName = (name) => {
   return updateProfile(auth.currentUser, {
-    displayName: name
+    displayName: name,
   });
 };
 
 export const updateNameAndRole = (name, role) => {
   return updateProfile(auth.currentUser, {
     displayName: name,
-    photoURL: role
+    photoURL: role,
   });
 };
 
-export const updatePhoneFunc = (phone) => {
-  // console.log("name: " +name, "phone: " +phone,"role: " + role,"category: " + category);
-  return updatePhoneNumber(auth.currentUser, phone);
-};
+// export const updatePhoneFunc = (phone) => {
+//   return updatePhoneNumber(auth.currentUser, phone);
+// };
 
-export const updateProfileData = (name, role, category) => {
+export const updateProfileData = (name, role, category, phone) => {
   // console.log("name: " +name, "phone: " +phone,"role: " + role,"category: " + category);
   return updateProfile(auth.currentUser, {
     displayName: name,
-    photoURL: role + "." + category
+    photoURL: role + "." + category + "." + phone,
   });
 };
 

@@ -28,6 +28,14 @@ export const assignComplaintTo = async (docId, maintainer) => {
   const docRef = doc(db, "complaints", docId);
   return updateDoc(docRef, {
     assignedTo: maintainer.name,
-    assignedToNumber: maintainer.phone
+    assignedToNumber: maintainer.phone,
+    status: "Complaint Assigned"
+  })
+};
+
+export const markComplaintAsDone = async (docId, maintainer) => {
+  const docRef = doc(db, "complaints", docId);
+  return updateDoc(docRef, {
+    status:"Complaint Resolved"
   })
 };

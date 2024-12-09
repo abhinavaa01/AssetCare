@@ -1,4 +1,4 @@
-import { assignComplaintTo } from "@/Services/api";
+import { assignComplaintTo, markComplaintAsDone } from "@/Services/api";
 
 export default function AssignComplaint(props) {
   const { data, index, maintainer } = props;
@@ -7,13 +7,36 @@ export default function AssignComplaint(props) {
 
   const assignComplaint = (e) => {
     e.preventDefault();
-    console.log(data.id);
-    assignComplaintTo(data.id, maintainer).then((res)=> {
+    // console.log(data.id);
+    if (!maintainer.name) {
+        alert("Add your name in your profile!");
+    } else if (!maintainer.phone) {
+        alert("Add your phone number first!");
+    } else
+    assignComplaintTo(data.id, maintainer)
+      .then((res) => {
         alert("Complaint assigned to you successfully!");
-    }).catch((err)=> {
+      })
+      .catch((err) => {
         alert("Something went wrong");
         console.error(err);
-    })
+      });
+    // console.log(data);
+  };
+
+  const markAsDone = (e) => {
+    e.preventDefault();
+    // console.log(data.id);
+    if (data.assignedTo === maintainer.name)
+      markComplaintAsDone(data.id, maintainer)
+        .then((res) => {
+          alert("Complaint marked as resolved!");
+        })
+        .catch((err) => {
+          alert("Something went wrong");
+          console.error(err);
+        });
+    else alert("Complaint is not assigned to you");
     // console.log(data);
   };
   return (
@@ -24,13 +47,16 @@ export default function AssignComplaint(props) {
       <div className="">Phone: {data.userPhone}</div>
       <div className="">Email: {data.userEmail}</div>
       {data.assignedTo ? (
-        <div className="">
+        <div className="text-success">
           Assigned To: {data.assignedTo + ", " + data.assignedToNumber}
         </div>
-      ) : null}
+      ) : 
+      <div className="text-danger">
+        Maintainer not assigned
+      </div>}
       <div className="">Registration date: {complaintDate.toDateString()}</div>
       <div className="">Registration Time: {complaintDate.toTimeString()}</div>
-      <div className="">Status: {data.status}</div>
+      <div className={data.status === "Complaint Resolved"? "text-success" : "text-danger"}>Status: {data.status}</div>
       <hr />
       <div className="d-flex">
         {data.assignedTo ? null : (
@@ -38,7 +64,13 @@ export default function AssignComplaint(props) {
             Assign Me
           </button>
         )}
-        <button className="btn btn-info me-2">Mark as Done</button>
+        <button
+          className="btn btn-info me-2"
+          onClick={markAsDone}
+          disabled={!data.assignedTo}
+        >
+          Mark as Done
+        </button>
       </div>
     </div>
   );
