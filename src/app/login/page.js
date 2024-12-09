@@ -17,6 +17,7 @@ export default function Login() {
     successmsg: "",
     errormsg: ""
   });
+  console.log(values);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -42,36 +43,8 @@ export default function Login() {
     setSignIn(!signIn);
   };
 
-  const nameChangeHandler = (e) => {
-    // console.log(e);
-    setValues({
-      ...values,
-      name: e.target.value,
-    });
-  };
-
-  const mailChangeHandler = (e) => {
-    // console.log(e);
-    setValues({
-      ...values,
-      mail: e.target.value,
-    });
-  };
-
-  const roleChangeHandler = (e) => {
-    // console.log(e);
-    setValues({
-      ...values,
-      role: e.target.value,
-    });
-  };
-
-  const passChangeHandler = (e) => {
-    // console.log(e);
-    setValues({
-      ...values,
-      pass: e.target.value,
-    });
+  const updateField = (field, value) => {
+    setValues({ ...values, [field]: value });
   };
 
   const handleLoading = (state) => {
@@ -123,13 +96,14 @@ export default function Login() {
         console.log(userCredentials);
       })
       .catch((err) => {
-        failure(err);
+        failure(err.message? err.message : err);
       });
   };
 
   const signInHandler = (e) => {
     e.preventDefault();
     handleLoading(true);
+    console.log(values.mail, values.pass);
     signInUser(values.mail, values.pass)
       .then((userCredentials) => {
         success("Signed in successfully! Please wait till you are redirected to the home page...");
@@ -137,7 +111,7 @@ export default function Login() {
         console.log(userCredentials);
       })
       .catch((err) => {
-        failure(err);
+        failure(err.message? err.message : err);
       });
   };
   return (
@@ -187,7 +161,7 @@ export default function Login() {
                 value={values.mail}
                 placeholder="Email Address"
                 className="mx-auto form-control text-start border"
-                onChange={mailChangeHandler}
+                onChange={(e)=>updateField("mail", e.target.value)}
               ></input>
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
@@ -199,7 +173,7 @@ export default function Login() {
                 value={values.pass}
                 placeholder="Password"
                 className="mx-auto form-control text-start border"
-                onChange={passChangeHandler}
+                onChange={(e)=>updateField("pass", e.target.value)}
               ></input>
             </div>
 
@@ -220,7 +194,7 @@ export default function Login() {
               <select
                 value={values.role}
                 className="mx-auto form-control text-start border"
-                onChange={roleChangeHandler}
+                onChange={(e)=>updateField("role", e.target.value)}
               >
                 <option value="complainer">COMPLAINER</option>
                 <option value="maintainer">MAINTAINER</option>
@@ -235,7 +209,7 @@ export default function Login() {
                 value={values.name}
                 placeholder="Full Name"
                 className="mx-auto form-control text-start border"
-                onChange={nameChangeHandler}
+                onChange={(e)=>updateField("name", e.target.value)}
               ></input>
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
@@ -247,7 +221,7 @@ export default function Login() {
                 value={values.mail}
                 placeholder="Email Address"
                 className="mx-auto form-control text-start border"
-                onChange={mailChangeHandler}
+                onChange={(e)=>updateField("mail", e.target.value)}
               ></input>
             </div>
             <div className="input-group flex-nowrap w-75 mx-auto my-1">
@@ -259,7 +233,7 @@ export default function Login() {
                 value={values.pass}
                 placeholder="Password"
                 className="mx-auto form-control text-start border"
-                onChange={passChangeHandler}
+                onChange={(e)=>updateField("pass", e.target.value)}
               ></input>
             </div>
 
