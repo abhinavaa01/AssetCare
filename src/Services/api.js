@@ -7,6 +7,8 @@ export const registerComplaint = async (values) => {
     userEmail: values.email,
     userPhone: values.phone,
     category: values.category,
+    issue: values.issue,
+    address: values.address,
     createDate: new Date(),
     status: "Complaint Received",
   });

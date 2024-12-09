@@ -1,9 +1,9 @@
 export default function Complaint(props) {
   const { data, key, index } = props;
-  // console.log( data );
+  console.log( data );
   const complaintDate = new Date(data.createDate.toMillis());
   return (
-    <div className="col-4 col-md-3 shadow-sm card p-3 mx-2">
+    <div className="col-10 col-md-3 shadow-sm card p-3 mx-2">
       <div className="fw-bold">Complaint Number: {index + 1}</div>
       <div className="">Complaint Id: {data.id}</div>
       <div className="">Name: {data.userName}</div>
