@@ -54,8 +54,9 @@ export default function AssignComplaint(props) {
       <div className="text-danger">
         Maintainer not assigned
       </div>}
-      <div className="">Registration date: {complaintDate.toDateString()}</div>
-      <div className="">Registration Time: {complaintDate.toTimeString()}</div>
+      <div className="">Category of Complaint: {data.category}</div>
+      <div className="">Registration date: {complaintDate.toLocaleDateString()}</div>
+      <div className="">Registration Time: {complaintDate.toLocaleTimeString()}</div>
       <div className={data.status === "Complaint Resolved"? "text-success" : "text-danger"}>Status: {data.status}</div>
       <hr />
       <div className="d-flex">

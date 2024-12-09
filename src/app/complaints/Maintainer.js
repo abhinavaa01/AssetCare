@@ -1,13 +1,11 @@
+"use client";
 import { redirect } from "next/navigation";
 import { Loader } from "../Static/Loader";
 import AssignComplaint from "./assignComplaint";
-import { auth } from "@/Services/firebase";
 import { useEffect, useState } from "react";
-import Modal from "../Static/Modal";
 import { getComplaintsByCategory } from "@/Services/api";
 
-export default function Maintainer() {
-    const currentUser = auth.currentUser;
+export default function Maintainer({ currentUser }) {
     const [complaints, setComplaints] = useState([]);
     const [loading, setLoading] = useState(false);
     const adminData = {
@@ -17,7 +15,7 @@ export default function Maintainer() {
     
     const getComplaints = () => {
         setLoading(true);
-        getComplaintsByCategory(currentUser?.photoURL?.split(".")[1].toUpperCase())
+        getComplaintsByCategory(currentUser?.photoURL?.split(".")[1]?.toUpperCase())
           .then((res) => {
             console.log(res);
             populateData(res);

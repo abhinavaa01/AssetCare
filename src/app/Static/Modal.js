@@ -2,7 +2,7 @@ import AddComplaint from "./AddComplaint";
 
 export default function Modal() {
   return (
-    <div className="modal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="AddcomplaintModal">
+    <div className="modal"  tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="AddcomplaintModal">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">

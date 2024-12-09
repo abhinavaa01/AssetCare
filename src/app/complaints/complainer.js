@@ -1,9 +1,11 @@
+"use client";
 import { getComplaintsByEmailId } from "@/Services/api";
-import { auth } from "@/Services/firebase";
 import Complaint from "./Complaint";
+import { useEffect, useState } from "react";
+import Modal from "../Static/Modal";
+import { Loader } from "../Static/Loader";
 
-export default function Complainer() {
-    const currentUser = auth.currentUser;
+export default function Complainer({ currentUser }) {
     const [complaints, setComplaints] = useState([]);
     const [loading, setLoading] = useState(false);
   
