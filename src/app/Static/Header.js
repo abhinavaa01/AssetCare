@@ -57,7 +57,7 @@ export default function Header() {
                             <li><span className='dropdown-item'>Email: {currentUser?.email}</span></li>
                             <li><span className='dropdown-item'>Phone: {currentUser?.photoURL?.split(".")[2]}</span></li>
                             <li><span className='dropdown-item'>Role: {currentUser?.photoURL?.split(".")[0]}</span></li>
-                            {currentUser?.photoURL?.split(".")[0]==="complainer"? 
+                            {currentUser?.photoURL?.split(".")[0].toLowerCase()==="complainer"? 
                                 null:<li><button className="dropdown-item" >Category : {currentUser?.photoURL?.split(".")[1]}</button></li>}
                             {currentUser?.emailVerified? 
                                 null:<li><button className="dropdown-item fw-bold" onClick={verifyMailHandler}>Verify Email</button></li>}

@@ -214,7 +214,7 @@ export default function Profile() {
                           <i className="bi bi-patch-exclamation"></i> Email is
                           not Verified!{" "}
                         </span>
-                        <a onClick={verifyMailSend} className="">
+                        <a onClick={verifyMailSend} className="" role="button">
                           Verify now!
                         </a>
                       </>

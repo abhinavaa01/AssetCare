@@ -36,8 +36,17 @@ export const assignComplaintTo = async (docId, maintainer) => {
 };
 
 export const markComplaintAsDone = async (docId, maintainer) => {
+  const now = new Date();
   const docRef = doc(db, "complaints", docId);
   return updateDoc(docRef, {
-    status:"Complaint Resolved"
+    status:"Complaint Resolved",
+    resolveDateTime: now
+  })
+};
+
+export const markComplaintAsArchived = async (docId, maintainer) => {
+  const docRef = doc(db, "complaints", docId);
+  return updateDoc(docRef, {
+    archived: true
   })
 };
