@@ -29,12 +29,7 @@ export default function Login() {
 
   setTimeout(() => {
     if (currentUser) {
-      if (currentUser.photoURL === "Complainer") {
-      // console.log(currentUser);
       redirect("/");
-      } else {
-        redirect("/maintainer");
-      }
     }
   }, 3000);
 
