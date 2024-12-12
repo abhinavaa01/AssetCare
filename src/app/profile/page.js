@@ -1,5 +1,5 @@
 "use client";
-import { updateNameAndRole, updatePhoneFunc, updateProfileData, verifyMail } from "@/Services/auth";
+import { updateProfileData, verifyMail } from "@/Services/auth";
 import { auth } from "@/Services/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ export default function Profile() {
   const [user, setUser] = useState(auth.currentUser);
   const [editing, setEditing] = useState(false);
   const [values, setValues] = useState({
-    phone: user?.photoURL.split(".")[2] || "",
+    phone: user?.photoURL?.split(".")[2] || "",
     name: user?.displayName || "",
     role: user?.photoURL?.split(".")[0] || "",
     category: user?.photoURL?.split(".")[1] || "",
@@ -22,10 +22,10 @@ export default function Profile() {
     if (user?.displayName)
     setValues({
       ...values,
-      phone: user.photoURL.split(".")[2],
+      phone: user.photoURL?.split(".")[2],
       name: user.displayName,
-      role: user.photoURL.split(".")[0],
-      category: user.photoURL.split(".")[1],
+      role: user.photoURL?.split(".")[0],
+      category: user.photoURL?.split(".")[1],
       email: user.email,
     });
   }, [user])
@@ -96,7 +96,7 @@ export default function Profile() {
   // const savePhone = (e) => {
   //   e.preventDefault();
   //   updateField("loading", true);
-  //   if (values.phone !== user.photoURL.split(".")[2])
+  //   if (values.phone !== user.photoURL?.split(".")[2])
   //   updatePhoneFunc(values.phone).then((res)=> {
   //     success("Phone Number updated successfully!");
   //     setEditing(false);
