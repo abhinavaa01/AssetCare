@@ -17,7 +17,6 @@ export default function Login() {
     successmsg: "",
     errormsg: ""
   });
-  console.log(values);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
